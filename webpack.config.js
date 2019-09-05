@@ -6,7 +6,7 @@ module.exports = [
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
-      bundle: path.resolve('./src/client/index.js')
+      bundle: path.resolve('./src/client/index.ts')
     },
     output: {
       path: path.resolve(__dirname, 'public/js')
