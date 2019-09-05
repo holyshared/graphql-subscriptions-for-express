@@ -1,10 +1,10 @@
 import { message } from './api';
 
 window.addEventListener('DOMContentLoaded', () => {
-  message.subscribe({ id: 'xyz' }, (data) => {
+  message.subscribe({ channelId: 'xyz' }, (data) => {
     console.log(data);
   });
 
   const btn = document.getElementById('add');
-  btn.addEventListener('click', () => message.add(), false);
+  btn.addEventListener('click', () => message.add("add content"), false);
 }, false);

@@ -8,8 +8,9 @@ const pubsub = new PubSub();
 
 const typeDefs = gql`
   type Message {
+    channelId: ID!
     id: ID!
-    name: String
+    content: String
   }
 
   type Query {
@@ -17,23 +18,29 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addMessage(id: ID!): Message
+    addMessage(channelId: ID!, content: String!): Message
   }
 
   type Subscription {
-    messageAdded(id: ID!): Message
+    messageAdded(channelId: ID!): Message
   }
 `;
 
 const resolvers = {
   Query: {
-    message: () => {
-      return { name: "added" };
+    message: (_, args: { id: string }) => {
+      const { id } = args;
+      return { id, channelId: 'xyz', content: "added" };
     }
   },
   Mutation: {
-    addMessage: (_, args) => {
-      const message = { id: args.id, name: uuid() };
+    addMessage: (_, args: { channelId: string, content: string }) => {
+      const { channelId, content } = args;
+      const message = {
+        id: uuid(),
+        channelId,
+        content
+      };
       pubsub.publish('messageAdded', { messageAdded: message });
       return message;
     }
@@ -42,7 +49,7 @@ const resolvers = {
     messageAdded: {
       subscribe: withFilter(
         () => pubsub.asyncIterator('messageAdded'),
-        (payload, variables) => payload.messageAdded.id === variables.id
+        (payload, variables) => payload.messageAdded.channelId === variables.channelId
       )
     }
   }

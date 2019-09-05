@@ -2,16 +2,16 @@ import gql from 'graphql-tag';
 import { client } from './graphql';
 
 type SubscribeVariables = {
-  id: string
+  channelId: string
 };
 
 export const subscribeMessage = (variables: SubscribeVariables, next: (data: any) => void) => {
   return client.subscribe({
     query: gql`
-      subscription Message($id: ID!) {
-        messageAdded(id: $id) {
-          id
-          name
+      subscription Message($channelId: ID!) {
+        messageAdded(channelId: $channelId) {
+          channelId
+          content
         }
       }
     `,
@@ -21,16 +21,17 @@ export const subscribeMessage = (variables: SubscribeVariables, next: (data: any
   });
 }
 
-const addMessage = () => {
+const addMessage = (content: string) => {
   return fetch('http://localhost:4000/graphql', {
     method: 'post',
     headers: {
       'content-type': 'application/json'
     },
     body: JSON.stringify({
-      query: 'mutation Message($id: ID!) { addMessage(id: $id) { id name } }',
+      query: 'mutation Message($channelId: ID!, $content: String!) { addMessage(channelId: $channelId, content: $content) { channelId content } }',
       variables: {
-        id: "xyz"
+        channelId: "xyz",
+        content
       }
     })
   }).then(res => {
