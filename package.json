@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "build": "webpack",
+    "start": "node src/server/index.js"
+  },
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
+    "apollo-link-http": "^1.5.15",
+    "apollo-link-ws": "^1.0.18",
+    "apollo-server-express": "^2.9.3",
+    "express": "^4.17.1",
+    "graphql": "^14.5.4",
+    "graphql-subscriptions": "^1.1.0",
+    "graphql-tag": "^2.10.1",
+    "subscriptions-transport-ws": "^0.9.16",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "ts-loader": "^6.0.4",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
+  }
+}
