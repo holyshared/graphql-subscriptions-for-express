@@ -1,7 +1,9 @@
 {
   "scripts": {
-    "build": "webpack",
-    "start": "node src/server/index.js"
+    "build": "webpack --config=.webpack/client.js && webpack --config=.webpack/server.js",
+    "build:client": "webpack --config=.webpack/client.js",
+    "build:server": "webpack --config=.webpack/server.js",
+    "start": "node server.js"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.6.3",
@@ -22,6 +24,7 @@
     "ts-loader": "^6.0.4",
     "typescript": "^3.6.2",
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7"
+    "webpack-cli": "^3.3.7",
+    "webpack-node-externals": "^1.7.2"
   }
 }

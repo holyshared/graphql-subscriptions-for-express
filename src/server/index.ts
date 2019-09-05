@@ -62,7 +62,7 @@ server.applyMiddleware({ app });
 const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
-app.use(express.static(path.resolve(__dirname, '../../public')));
+app.use(express.static('./public'));
 
 httpServer.listen(4000, () => {
   console.log(`🚀 Server ready at ${server.graphqlPath}`);
