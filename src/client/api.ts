@@ -22,22 +22,19 @@ export const subscribeMessage = (variables: SubscribeVariables, next: (data: any
 }
 
 const addMessage = (content: string) => {
-  return fetch('http://localhost:4000/graphql', {
-    method: 'post',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      query: 'mutation Message($channelId: ID!, $content: String!) { addMessage(channelId: $channelId, content: $content) { channelId content } }',
-      variables: {
-        channelId: "xyz",
-        content
+  return client.mutate({
+    mutation: gql`
+      mutation Message($channelId: ID!, $content: String!) {
+        addMessage(channelId: $channelId, content: $content) {
+          channelId
+          content
+        }
       }
-    })
-  }).then(res => {
-    return res.json();
-  }).then(res => {
-    console.log(res);
+    `,
+    variables: {
+      channelId: "xyz",
+      content
+    }
   });
 };
 
