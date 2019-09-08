@@ -15,12 +15,12 @@ export const Index = ({ channelId, messages }: IndexProps) => {
 
   const onAdded = (values) => {
     const { data: { messageAdded } } = values;
-    setItems([ ...items, messageAdded ]);
+    setItems((current) => current.concat([messageAdded]));
   };
 
   useEffect(() => {
     message.subscribe({ channelId }, onAdded);
-  }, [items, setItems, message]);
+  }, []);
 
   return (
     <React.Fragment>
