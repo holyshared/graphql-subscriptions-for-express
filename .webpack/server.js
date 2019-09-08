@@ -20,12 +20,18 @@ module.exports = [
           test: /\.(ts|tsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: "ts-loader"
+            loader: "ts-loader",
+            options: {
+              configFile: path.resolve(__dirname, '../tsconfig.server.json')
+            }
           }
         },
       ],
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env.MODE': JSON.stringify('server')
+      }),
       new webpack.SourceMapDevToolPlugin()
     ],
     resolve: {

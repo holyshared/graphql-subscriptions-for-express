@@ -10,6 +10,7 @@ export const subscribeMessage = (variables: SubscribeVariables, next: (data: any
     query: gql`
       subscription Message($channelId: ID!) {
         messageAdded(channelId: $channelId) {
+          id
           channelId
           content
         }
@@ -26,6 +27,7 @@ const addMessage = (content: string) => {
     mutation: gql`
       mutation Message($channelId: ID!, $content: String!) {
         addMessage(channelId: $channelId, content: $content) {
+          id
           channelId
           content
         }

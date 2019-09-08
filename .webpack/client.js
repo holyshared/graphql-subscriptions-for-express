@@ -17,12 +17,18 @@ module.exports = [
           test: /\.(ts|tsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: "ts-loader"
+            loader: "ts-loader",
+            options: {
+              configFile: path.resolve(__dirname, '../tsconfig.client.json')
+            }
           }
         },
       ],
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env.MODE': JSON.stringify('client')
+      }),
       new webpack.SourceMapDevToolPlugin()
     ],
     resolve: {
