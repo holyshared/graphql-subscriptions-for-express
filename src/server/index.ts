@@ -2,6 +2,7 @@ import * as http from 'http';
 import * as express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { typeDefs, resolvers } from './graphql';
+import { index } from './actions';
 
 const server = new ApolloServer({
   typeDefs,
@@ -18,6 +19,8 @@ const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 app.use(express.static('./public'));
+
+app.get('/', index);
 
 httpServer.listen(4000, () => {
   console.log(`🚀 Server ready at ${server.graphqlPath}`);
