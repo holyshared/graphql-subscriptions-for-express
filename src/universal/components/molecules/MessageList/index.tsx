@@ -1,14 +1,25 @@
 import * as React from 'react';
 import { Message } from '../../atoms/Message';
+import styled from 'styled-components';
 
 type MessageListProps = {
-  items: { id: string, content: string }[]
+  className?: string;
+  items: { id: string, content: string }[];
 };
 
-export const MessageList = ({ items }: MessageListProps) => {
+const InternalMessageList = ({ className, items }: MessageListProps) => {
   return (
-    <ul>
+    <ul className={className}>
       {items.map(message => (<Message key={message.id} {...message} />))}
     </ul>
   );
 };
+
+export const MessageList = styled(InternalMessageList)`
+list-style: none;
+margin: 0;
+padding: 0;
+li {
+  margin-bottom: 10px;
+}
+`;
