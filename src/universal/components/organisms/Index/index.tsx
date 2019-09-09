@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useState, useCallback, useEffect } from 'react';
+import { PageHeader } from '../../atoms/Header';
 import { MessageForm } from '../../molecules/MessageForm';
 import { MessageList } from '../../molecules/MessageList';
+import { Page } from '../Container';
 import { message } from '../../../../client/api';
 
 type IndexProps = {
@@ -23,10 +25,10 @@ export const Index = ({ channelId, messages }: IndexProps) => {
   }, []);
 
   return (
-    <React.Fragment>
-      <h1>GraphQL Subscription for Express</h1>
+    <Page>
+      <PageHeader title="GraphQL Subscription for Express" />
       <MessageForm onClick={onClick} />
       <MessageList items={items} />
-    </React.Fragment>
+    </Page>
   );
 };
